@@ -1,17 +1,25 @@
+import Star from "./Star";
 
-function Card({ media }) {
+function Card({ movie }) {
 
-
+    const prova= ()=>{
+        console.log(movie.map((item)=>item.title));
+        console.log(movie.map((item)=>item.vote_average));
+    }
+    if(movie)
+        prova();
     return (
         <>
-            {media.map((item) => (
-                <div key={item.id} className=" bg-zinc-500 text-center">
-                    <h2>{item.title}</h2>
+            {movie.map((item) => (
+                <div key={item.id} className="text-center ">
                     <div>
-                        <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt="" />
+                        <img src={`https://image.tmdb.org/t/p/w342${item.poster_path}`} alt={`${item.title}`} className="rounded-md" />
                     </div>
-                    <p>Rating: {item.vote_average}</p>
-                    <p>Votes: {item.vote_count}</p>
+                    <div className="overlayCard">
+                        <h2>Titolo:{item.title}</h2>
+                        <p>Voto:  <Star num ={ item.vote_average ? item.vote_average/2 : 0} /></p>
+                        <p className=" descriptionCard">Riassunto: {item.overview}</p>
+                    </div>
                 </div>
             ))}
         </>

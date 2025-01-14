@@ -12,14 +12,13 @@ export const MovieProvider = ({ children }) => {
     const [series, setSeries] = useState([]);
     const [isSearching, setIsSearching] = useState(false);
 
-    const fetchApi = async (query, entity) => {
+    const fetchApiMovie = async (query, entity) => {
 
         try {
             const res = await axios.get(`${apiUrl}/search/${entity}`, {
                 params: { language: "it-IT", query, api_key: mykey },
             });
             entity == "movie" ? setMovie(res.data.results) : setSeries(res.data.results);
-            console.log(res.data.results);
         } catch (e) {
 
             console.error(e);
@@ -29,12 +28,13 @@ export const MovieProvider = ({ children }) => {
         }
     };
 
+
     const search = async (query) =>{
 
         query = query.trim();
         if(query){
-            fetchApi(query, "movie");
-            fetchApi(query, "tv");
+            fetchApiMovie(query, "movie");
+            fetchApiMovie(query, "tv");
             setIsSearching(true);
         }else{
             setMovie([]);
@@ -44,7 +44,7 @@ export const MovieProvider = ({ children }) => {
     };
 
 
-    const contextValue = { movie, setMovie, series, setSeries, search, fetchApi };
+    const contextValue = { movie, setMovie, series, setSeries, search, fetchApiMovie };
 
     return (
 

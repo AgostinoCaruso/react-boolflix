@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { MovieContext } from "../Context/MovieContext";
 
 import Card from "./Card";
@@ -11,8 +11,8 @@ function MediaList() {
             {movie.length > 1 ? (
                 <>
                     <h2 className="text-5xl">Movie</h2>
-                    <div className="grid grid-cols-3 gap-3">
-                        <Card media={movie} />
+                    <div className="grid grid-cols-5 gap-3">
+                        <Card movie={movie} />
                     </div>
                 </>
             ) : (
