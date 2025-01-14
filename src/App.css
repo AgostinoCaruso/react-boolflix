@@ -3,10 +3,28 @@
 @tailwind utilities;
 
 body{
-  background-color: grey;
+  background-color: black;
 }
 
 main{
+  padding-top: 50px;
   max-width: 1200px;
   margin: 0 auto;
+  color: white;
+}
+
+header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.descriptionCard {
+  display: -webkit-box;         
+  -webkit-line-clamp: 7;      
+  -webkit-box-orient: vertical; 
+  overflow: hidden;            
+  text-overflow: ellipsis;     
 }

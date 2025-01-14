@@ -28,7 +28,7 @@ function Search() {
                 value={searchValue}
                 onChange={e => { setSearchValue(e.target.value) }}
                 placeholder="Scrivi..."
-                className=" p-1"
+                className=" p-1 rounded-md"
             />
             {/* <button className=" px-1 bg-red-500" onClick={() => search(searchValue)}>Cerca</button> */}
         </>

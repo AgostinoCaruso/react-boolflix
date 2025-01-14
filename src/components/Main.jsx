@@ -4,7 +4,7 @@ function Main(){
 
     return(
 
-        <main className=" container my-5">
+        <main className=" container my-5 mb-20">
             <MediaList/>
         </main>
     );

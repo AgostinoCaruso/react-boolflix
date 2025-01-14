@@ -1,24 +1,37 @@
 import Star from "./Star";
+import { useState } from "react";
 
 function Card({ movie }) {
+    const [hoveredIndex, setHoveredIndex] = useState(null); 
 
-    const prova= ()=>{
-        console.log(movie.map((item)=>item.title));
-        console.log(movie.map((item)=>item.vote_average));
-    }
-    if(movie)
-        prova();
     return (
         <>
-            {movie.map((item) => (
-                <div key={item.id} className="text-center ">
+            {movie.map((item, index) => (
+                <div
+                    key={item.id} 
+                    className="text-center relative "
+                    onMouseOver={() => setHoveredIndex(index)} 
+                    onMouseOut={() => setHoveredIndex(null)}  
+                >
                     <div>
-                        <img src={`https://image.tmdb.org/t/p/w342${item.poster_path}`} alt={`${item.title}`} className="rounded-md" />
+                        <img
+                            src={`https://image.tmdb.org/t/p/w342${item.poster_path}`}
+                            alt={`${item.title}`}
+                            className={`rounded-md transform transition-all duration-300 
+                                ${hoveredIndex === index ? "scale-110 z-60 " : "transition-all duration-300 scale-100 z-0"}`}  
+                        />
                     </div>
-                    <div className="overlayCard">
-                        <h2>Titolo:{item.title}</h2>
-                        <p>Voto:  <Star num ={ item.vote_average ? item.vote_average/2 : 0} /></p>
-                        <p className=" descriptionCard">Riassunto: {item.overview}</p>
+
+                    <div
+                        className={`p-3 absolute top-0 left-0 w-full h-full bg-black bg-opacity-70 text-white 
+                            transition-all duration-300 
+                            ${hoveredIndex === index ? "opacity-100 scale-110 cursor-pointer" : "transition-all duration-300 scale-100 opacity-0 z-0"}`}
+                    >
+                        <div className="flex flex-col justify-center items-center h-full">
+                            <h2 className="text-xl font-bold">{item.title}</h2>
+                            <p>Voto: <Star num={item.vote_average / 2} /></p>
+                            <p className="descriptionCard px-4">{item.overview}</p>
+                        </div>
                     </div>
                 </div>
             ))}
