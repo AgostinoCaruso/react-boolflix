@@ -1,16 +1,24 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { MovieContext } from "../Context/MovieContext";
 
 
 function Search() {
     const { search } = useContext(MovieContext);
-    
+
     const [searchValue, setSearchValue] = useState("");
 
-    const onEnterSearch = (e) =>{
-        if(!searchValue) search("");
-        if(e.code == "Enter") search(searchValue);
-    }
+    // togliere useEffect se vuoi usare il button
+    useEffect(() => {
+
+        if (searchValue.trim()) {
+
+            search(searchValue);
+        } else {
+            search("");
+        }
+    }, [searchValue])
+
+
     return (
 
         <>
@@ -22,7 +30,7 @@ function Search() {
                 placeholder="Scrivi..."
                 className=" p-1"
             />
-            <button className=" px-1 bg-red-500" onClick={() => search(searchValue)}>Cerca</button>
+            {/* <button className=" px-1 bg-red-500" onClick={() => search(searchValue)}>Cerca</button> */}
         </>
     );
 }
