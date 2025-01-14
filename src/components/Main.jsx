@@ -1,9 +1,12 @@
+import MediaList from "./MediaList";
 
 function Main(){
 
     return(
 
-        <h1>bubb</h1>
+        <main className=" container my-5">
+            <MediaList/>
+        </main>
     );
 }
 
