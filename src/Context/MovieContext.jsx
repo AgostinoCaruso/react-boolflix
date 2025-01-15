@@ -15,13 +15,14 @@ export const MovieProvider = ({ children }) => {
     const [series, setSeries] = useState([]);
     const [isSearching, setIsSearching] = useState(false);
 
-    const fetchApiMovie = async (query, entity) => {
+    const fetchApiMedia = async (query, entity) => {
 
         try {
             const res = await axios.get(`${apiUrl}/search/${entity}`, {
                 params: { language: "it-IT", query, api_key: mykey },
             });
             entity == "movie" ? setMovie(res.data.results) : setSeries(res.data.results);
+            console.log(res.data.results);
         } catch (e) {
 
             console.error(e);
@@ -31,11 +32,11 @@ export const MovieProvider = ({ children }) => {
         }
     };
 
-    const fetchApiPopular = async (query) => {
+    const fetchApiPopular = async () => {
 
         try {
             const res = await axios.get(`${apiUrl}/movie/popular`, {
-                params: { language: "it-IT", query, api_key: mykey },
+                params: { language: "it-IT", api_key: mykey },
             });
             setPopular(res.data.results.slice(0, 5));
         } catch (e) {
@@ -47,11 +48,11 @@ export const MovieProvider = ({ children }) => {
         }
     };
 
-    const fetchApiTopRated = async (query) => {
+    const fetchApiTopRated = async () => {
 
         try {
             const res = await axios.get(`${apiUrl}/movie/top_rated`, {
-                params: { language: "it-IT", query, api_key: mykey },
+                params: { language: "it-IT", api_key: mykey },
             });
             setTopRated(res.data.results.slice(0, 5));
         } catch (e) {
@@ -63,12 +64,12 @@ export const MovieProvider = ({ children }) => {
         }
     };
 
-    const search = async (query) => {
+    function search(query) {
 
         query = query.trim();
         if (query) {
-            fetchApiMovie(query, "movie");
-            fetchApiMovie(query, "tv");
+            fetchApiMedia(query, "movie");
+            fetchApiMedia(query, "tv");
             //svuoto popular & rated
             setPopular([]);
             setTopRated([]);
@@ -84,7 +85,7 @@ export const MovieProvider = ({ children }) => {
     };
 
 
-    const contextValue = { movie, setMovie, series, setSeries, search, fetchApiMovie, popular, fetchApiPopular, topRated, fetchApiTopRated };
+    const contextValue = { isSearching, movie, setMovie, series, setSeries, search, fetchApiMedia, popular, fetchApiPopular, topRated, fetchApiTopRated };
 
     return (
 

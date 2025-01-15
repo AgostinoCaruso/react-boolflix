@@ -8,15 +8,15 @@ function Search() {
     const [searchValue, setSearchValue] = useState("");
 
     // togliere useEffect se vuoi usare il button
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (searchValue.trim()) {
+    //     if (searchValue.trim()) {
 
-            search(searchValue);
-        } else {
-            search("");
-        }
-    }, [searchValue])
+    //         search(searchValue);
+    //     } else {
+    //         search("");
+    //     }
+    // }, [searchValue])
 
 
     return (
@@ -30,7 +30,7 @@ function Search() {
                 placeholder="Scrivi..."
                 className=" p-1 rounded-md"
             />
-            {/* <button className=" px-1 bg-red-500" onClick={() => search(searchValue)}>Cerca</button> */}
+            <button className=" px-1 bg-red-500" onClick={() => search(searchValue)}>Cerca</button>
         </>
     );
 }
